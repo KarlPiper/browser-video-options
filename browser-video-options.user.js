@@ -4,12 +4,11 @@
 // @author         Karl Piper
 // @homepage       https://greasyfork.org/en/users/8252
 // @namespace      https://greasyfork.org/en/users/8252
-// @include        /https?:\/\/.*\.(mp4|webm)/
-// @include        /file:\/\/.*\.(mp4|webm)/
+// @include        /(https?|file)[\.:]\/{2,3}.*\.(mts|avi|mov|ogm|wav|webm|mkv|flv|ogv|ogg|wmv|mp4|m4p|m4v|mpg|mp2|mpe|mpeg|mpv|3gp|3gpp|3g2)/
 // @grant          none
 // @require        https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js
 // @icon           https://i.imgur.com/CxT2VtA.png
-// @version        1.0
+// @version        2.0
 // ==/UserScript==
 
         controls = true;
