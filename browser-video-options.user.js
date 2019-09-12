@@ -8,24 +8,25 @@
 // @grant          none
 // @require        https://code.jquery.com/jquery-3.4.0.min.js
 // @icon           https://i.imgur.com/CxT2VtA.png
-// @version        2.2
+// @version        2.3
 // ==/UserScript==
 
 /*═════════════════╦═══════════════════════════════════╦════════════╗
 ║ Options          ║              Description          ║   Value    ║
 ╠══════════════════╬═══════════════════════════════════╬════════════╣
-║ Controls         ║ Show video control bar            ║ true/false ║
+║ controls         ║ Show video controls bar           ║ true/false ║
 ║ noDownload       ║ Hide download control control     ║ true/false ║
 ║ noRemotePlayback ║ Hide remote playback control      ║ true/false ║
 ║ noFullscreen     ║ Hide fullscreen control           ║ true/false ║
 ║ noPip            ║ Hide picture-in-picture control   ║ true/false ║
-║ Loop             ║ Replay video after ending         ║ true/false ║
-║ Autoplay         ║ Automatically start playing       ║ true/false ║
-║ Muted            ║ Mute video (overrides volume)     ║ true/false ║
-║ Width            ║ Video width, optional             ║ CSS units  ║
-║ Height           ║ Video height, optional            ║ CSS units  ║
-║ Poster           ║ Placeholder image, optional       ║ URL        ║
-║ Volume           ║ Volume, defaults to 1.0, optional ║ 0.0 - 1.0  ║
+║ loop             ║ Replay video after ending         ║ true/false ║
+║ autoplay         ║ Automatically start playing       ║ true/false ║
+║ muted            ║ Mute video (overrides volume)     ║ true/false ║
+║ width            ║ Video width, optional             ║ CSS units  ║
+║ height           ║ Video height, optional            ║ CSS units  ║
+║ poster           ║ Placeholder image, optional       ║ URL        ║
+║ volume           ║ Volume, defaults to 1.0, optional ║ 0.0 - 1.0  ║
+║ customCss        ║ Styles applied to page, optional  ║ CSS        ║
 ╠══════════════════╬═══════════════════════════════════╬════════════╣
 ║ showSettings     ║ Display settings, for debugging   ║ true/false ║
 ╚══════════════════╩═══════════════════════════════════╩═══════════*/
@@ -34,13 +35,14 @@ var autoplay = true;
 var muted = false;
 var controls = true;
 var noPip = false;
-var noDownload = true;
-var noRemotePlayback = true;
+var noDownload = false;
+var noRemotePlayback = false;
 var noFullscreen = false;
 var width = '100%';
 var height = 'auto';
 var poster = '';
-var volume = '.5';
+var volume = '';
+var customCss = ``;
 var showSettings = false;
 /*═════════════════════════════════════════════════════════════════*/
 
@@ -66,6 +68,7 @@ $(function(){
 		$('video')[0].muted = "muted";
 	}
 	//nullify unset variables
+	if (!customCss) customCss = null;
 	if (!width) width = null;
 	if (!height) height = null;
 	if (!poster) poster = null;
@@ -76,8 +79,12 @@ $(function(){
 	$('video').attr({disablepictureinpicture, controls, controlslist, autoplay, loop, width, height, poster});
 	//debugging options
 	if (showSettings) {
-		$('body').append('<div class="showSettings">' + '<span>loop:</span><span>' + loop + '</span><br>'+ '<span>autoplay:</span><span>' + autoplay + '</span><br>'+ '<span>muted:</span><span>' + muted + '</span><br>'+ '<span>controls:</span><span>' + controls + '</span><br>'+ '<span>noPip:</span><span>' + noPip + '</span><br>'+ '<span>noDownload:</span><span>' + noDownload + '</span><br>'+ '<span>noRemotePlayback:</span><span>' + noRemotePlayback + '</span><br>'+ '<span>noFullscreen:</span><span>' + noFullscreen + '</span><br>'+ '<span>width:</span><span>' + width + '</span><br>'+ '<span>height:</span><span>' + height + '</span><br>'+ '<span>poster:</span><span>' + poster + '</span><br>'+ '<span>volume:</span><span>' + volume + '</span><br>'+ '</div>');
+		$('body').append('<div class="showSettings">' + '<span>loop:</span><span>' + loop + '</span><br>'+ '<span>autoplay:</span><span>' + autoplay + '</span><br>'+ '<span>muted:</span><span>' + muted + '</span><br>'+ '<span>controls:</span><span>' + controls + '</span><br>'+ '<span>noPip:</span><span>' + noPip + '</span><br>'+ '<span>noDownload:</span><span>' + noDownload + '</span><br>'+ '<span>noRemotePlayback:</span><span>' + noRemotePlayback + '</span><br>'+ '<span>noFullscreen:</span><span>' + noFullscreen + '</span><br>'+ '<span>width:</span><span>' + width + '</span><br>'+ '<span>height:</span><span>' + height + '</span><br>'+ '<span>poster:</span><span>' + poster + '</span><br>'+ '<span>volume:</span><span>' + volume + '</span><br><span>customCss:</span><span>' + customCss + '</span>'+ '</div>');
 		$('.showSettings').css({'color':'white','position':'absolute','pointer-events':'none'});
-		$('.showSettings span').css({'min-width':'150px','display':'inline-block','margin-bottom':'4px','background':'rgba(0,0,0,.5)'});
+		$('.showSettings span').css({'min-width':'150px','display':'inline-block','margin-bottom':'4px','background':'rgba(0,0,0,.5)','white-space':'pre'});
+	}
+	//custom css
+	if (customCss) {
+		$('<style id="browser-video-options-css">'+customCss+'</style>').appendTo('head');
 	}
 });
