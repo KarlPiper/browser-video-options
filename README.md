@@ -2,32 +2,37 @@
 ![logo image](https://i.imgur.com/CxT2VtA.png)
 
 ## About
- + Customize in-browser video playback. View on [Greasyfork](https://greasyfork.org/en/scripts/34563-browser-video-options).
+ + Customize in-browser audio/video playback. View on [Greasyfork](https://greasyfork.org/en/scripts/34563-browser-video-options).
 
 ## Works with
 + Local files (file:///example/video.webm)
 + Hosted files (example.com/video.webm)
-+ Common filetypes (mts, avi, mov, ogm, wav, webm, mkv, flv, ogv, ogg, wmv, mp4, m4p, m4v, mpg, mp2, mpe, mpeg, mpv, 3gp, 3gpp, 3g2)
-  + Leave feedback if you discover any issues
++ Common filetypes (3g2, 3gp, 3gpp, aac, avi, flac, flv, m4a, m4p, m4v, mka, mkv, mov, mp2, mp3, mp4, mpe, mpeg, mpg, mpv, mts, oga, ogg, ogm, ogv, opus, wav, weba, webm, wmv)
+  + Leave feedback if any are missing
 
 ## Settings
     ╔══════════════════╦═══════════════════════════════════╦════════════╗
-    ║ Options          ║              Description          ║   Value    ║
+    ║      Options     ║            Description            ║   Value    ║
     ╠══════════════════╬═══════════════════════════════════╬════════════╣
+    ║ loop             ║ Replay after ending               ║ true/false ║
+    ║ autoplay         ║ Automatically start playing       ║ true/false ║
+    ║ muted            ║ Mute sound (overrides volume)     ║ true/false ║
     ║ controls         ║ Show video controls bar           ║ true/false ║
+    ║ noPip            ║ Hide picture-in-picture control   ║ true/false ║
     ║ noDownload       ║ Hide download control control     ║ true/false ║
     ║ noRemotePlayback ║ Hide remote playback control      ║ true/false ║
     ║ noFullscreen     ║ Hide fullscreen control           ║ true/false ║
-    ║ noPip            ║ Hide picture-in-picture control   ║ true/false ║
-    ║ loop             ║ Replay video after ending         ║ true/false ║
-    ║ autoplay         ║ Automatically start playing       ║ true/false ║
-    ║ muted            ║ Mute video (overrides volume)     ║ true/false ║
     ║ width            ║ Video width, optional             ║ CSS units  ║
     ║ height           ║ Video height, optional            ║ CSS units  ║
     ║ poster           ║ Placeholder image, optional       ║ URL        ║
-    ║ volume           ║ Volume, defaults to 1.0, optional ║ 0.0 - 1.0  ║
-    ║ customCss        ║ Styles applied to page, optional  ║ CSS        ║
+    ║ volume           ║ Default volume level              ║ 0.0 - 1.0  ║
     ╠══════════════════╬═══════════════════════════════════╬════════════╣
-    ║ showSettings     ║ Display settings, for debugging   ║ true/false ║
+    ║ audioLoop        ║ Replay after ending               ║ true/false ║
+    ║ audioAutoplay    ║ Automatically start playing       ║ true/false ║
+    ║ audioMuted       ║ Mute sound (overrides volume)     ║ true/false ║
+    ║ audioControls    ║ Show audio controls bar           ║ true/false ║
+    ║ audioVolume      ║ Default volume level              ║ 0.0 - 1.0  ║
+    ╠══════════════════╬═══════════════════════════════════╬════════════╣
+    ║ showSettings     ║ Logs all settings, for debugging  ║ true/false ║
+    ║ customCss        ║ Styles applied to page, optional  ║ CSS        ║
     ╚══════════════════╩═══════════════════════════════════╩════════════╝
-  
