@@ -193,7 +193,7 @@ $(function(){
 	function audioFile() {
 		replaceVideo()
 		//handle unset variables
-		if (!audioVolume) $('video').prop('volume', 1);
+		if (!audioVolume) vid.prop('volume', 1);
 		//apply attributes to <video>
 		if (audioMuted) $('video')[0].muted = true;
 		$('video').attr({'loop':audioLoop, 'autoplay':audioAutoplay, 'controls':audioControls,}).prop('volume', audioVolume);
