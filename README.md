@@ -5,7 +5,7 @@
  + Customize in-browser audio/video playback. View on [Greasyfork](https://greasyfork.org/en/scripts/34563-browser-video-options).
  
  ## To Do
- + Check FF/GM compatibility
+ + Make FF/GM compatible (source of `<video>` is invisible?)
 
 ## Works with
 + Local files (file:///example/video.webm)
