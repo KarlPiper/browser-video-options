@@ -11,7 +11,7 @@
 + Local files (file:///example/video.webm)
 + Hosted files (example.com/video.webm)
 + Common filetypes (3g2, 3gp, 3gpp, aac, avi, flac, flv, m4a, m4p, m4v, mka, mkv, mov, mp2, mp3, mp4, mpe, mpeg, mpg, mpv, mts, oga, ogg, ogm, ogv, opus, wav, weba, webm, wmv)
-  + Leave feedback if any are missing
+  + Please do oppen an issue if anything is missing
 
 ## Settings
     ╔══════════════════╦═══════════════════════════════════╦════════════╗
