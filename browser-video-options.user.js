@@ -4,14 +4,14 @@
 // @author         Karl Piper
 // @homepage       https://greasyfork.org/en/users/8252
 // @namespace      https://greasyfork.org/en/users/8252
-// @include        /^(https?|file)[\.:]\/{2,4}.*\.(3g2|3gp|3gpp|aac|amr|avi|flac|flv|m4a|m4p|m4v|mka|mkv|mov|mp2|mp3|mp4|mpe|mpeg|mpg|mpv|mts|oga|ogg|ogm|ogv|opus|wav|weba|webm|wmv)(\?.*=.*)?$/
+// @include        /^(https?|file)[\.:]\/{2,4}.*\.(3g2|3gp|3gpp|aac|amr|avi|flac|flv|m4a|m4p|m4v|mka|mkv|mov|mp2|mp3|mp4|mpe|mpeg|mpg|mpv|mts|oga|ogg|ogm|ogv|opus|wav|weba|webm|wmv)((\?|&).*)?$/
 // @noframes
 // @grant          none
 // @require        https://code.jquery.com/jquery-3.4.0.min.js
 // @require        https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/keyby.js
 // @require        https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/screenfull.js
-// @icon           https://i.imgur.com/CxT2VtA.png
-// @version        6.2
+// @icon           https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/icon.png
+// @version        6.4
 // ==/UserScript==
 
 /*═════════════════╦═══════════════════════════════════╦════════════╗
