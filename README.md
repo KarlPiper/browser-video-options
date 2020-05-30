@@ -1,5 +1,5 @@
 # browser-video-options
-![logo image](https://i.imgur.com/CxT2VtA.png)
+![logo image](icon.png)
 
 ## About
  + Customize in-browser audio/video playback. View on [Greasyfork](https://greasyfork.org/en/scripts/34563-browser-video-options).
