@@ -11,11 +11,13 @@
 // @require        https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/keyby.js
 // @require        https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/screenfull.js
 // @icon           https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/icon.png
-// @version        6.4
+// @version        7.0
 // ==/UserScript==
 
+//don't forget to allow your script manager to run in incognito and local files
+
 /*═════════════════╦═══════════════════════════════════╦════════════╗
-║      Options     ║            Description            ║   Value    ║
+║      Options     ║            Description            ║   Values   ║
 ╠══════════════════╬═══════════════════════════════════╬════════════╣
 ║ loop             ║ Replay after ending               ║ true/false ║
 ║ autoplay         ║ Automatically start playing       ║ true/false ║
@@ -25,10 +27,11 @@
 ║ noDownload       ║ Hide download control control     ║ true/false ║
 ║ noRemotePlayback ║ Hide remote playback control      ║ true/false ║
 ║ noFullscreen     ║ Hide fullscreen control           ║ true/false ║
-║ width            ║ Video width, optional             ║ CSS units  ║
-║ height           ║ Video height, optional            ║ CSS units  ║
-║ poster           ║ Placeholder image, optional       ║ URL        ║
+║ width            ║ Video width; optional             ║ CSS units  ║
+║ height           ║ Video height; optional            ║ CSS units  ║
+║ poster           ║ Placeholder image; optional       ║ URL        ║
 ║ volume           ║ Default volume level              ║ 0.0 - 1.0  ║
+║ speed            ║ Default volume level              ║ 0.0 - 1.0  ║
 ╠══════════════════╬═══════════════════════════════════╬════════════╣
 ║ audioLoop        ║ Replay after ending               ║ true/false ║
 ║ audioAutoplay    ║ Automatically start playing       ║ true/false ║
@@ -37,17 +40,17 @@
 ║ audioVolume      ║ Default volume level              ║ 0.0 - 1.0  ║
 ╠══════════════════╬═══════════════════════════════════╬════════════╣
 ║ showSettings     ║ Logs all settings, for debugging  ║ true/false ║
-║ customCss        ║ Styles applied to page, optional  ║ CSS        ║
+║ customCss        ║ Custom CSS applied; optional      ║ CSS rules  ║
 ╚══════════════════╩═══════════════════════════════════╩═══════════*/
 //video files
 var loop = true;
 var autoplay = true;
 var muted = false;
 var controls = true;
-var noPip = false;
+var noPip = true;
 var noDownload = true;
 var noRemotePlayback = true;
-var noFullscreen = false;
+var noFullscreen = true;
 var width = '100%';
 var height = 'auto';
 var poster = '';
@@ -59,7 +62,7 @@ var audioMuted = false;
 var audioControls = true;
 var audioVolume = '1.0';
 //other
-var showSettings = true;
+var showSettings = false;
 var customCss = ``;
 /*═════════════════════════════════════════════════════════════════*/
 
@@ -69,10 +72,16 @@ $(function(){
 	var src = vid.find('source');
 
 	//detect MIME type
-	if (src.attr('type').split('/')[0] === 'video') {
-		videoFile();
-	} else if (src.attr('type').split('/')[0] === 'audio') {
-		audioFile();
+	try {
+		if (src.attr('type').split('/')[0] === 'video') {
+			videoFile();
+		} else if (src.attr('type').split('/')[0] === 'audio') {
+			audioFile();
+		}
+	}
+	catch(err) {
+		console.log('Couldn\'t detect MIME type!');
+		console.log(err);
 	}
 
 	//start with blank video element
@@ -92,6 +101,7 @@ $(function(){
 	}
 
 	function videoFile() {
+	var videoDimensions = 'width:'+width+'; height:'+height;
 		replaceVideo()
 		//set controlslist
 		var controlslist = '';
@@ -111,7 +121,7 @@ $(function(){
 		if (!poster) poster = null;
 		if (!controlslist) controlslist = null;
 		if (noPip) var disablepictureinpicture = true;
-		//apply attributes to <video>
+		//apply attributes to video
 		if (muted) $('video')[0].muted = true;
 		$('video').attr({disablepictureinpicture, controls, controlslist, autoplay, loop, width, height, poster}).prop('volume', volume);
 	}
@@ -126,11 +136,27 @@ $(function(){
 		}
 	}
 
+	function changeSpeed(n) {
+		var currentRate = $('video').prop('playbackRate');
+		var changeRate = currentRate + n;
+		if (changeRate <= 0) {
+			return false;
+		} else {
+			$('video').prop('playbackRate', changeRate);
+		}
+	}
+
 	//custom keybindings
-	keyby.on('down', function(){
+	keyby.on('down', function() {//volume
 		changeVol(-10);
-	}).on('up', function () {
+	}).on('up', function() {
 		changeVol(10);
+	}).on('[', function() {//playback rate
+		changeSpeed(-.25);
+	}).on(']', function() {
+		changeSpeed(.25);
+	}).on('=', function() {
+		$('video').prop('playbackRate', 1.0);
 	}).on('m', function() {
 		if ($('video')[0].muted === true) {
 			$('video')[0].muted = false;
@@ -144,5 +170,5 @@ $(function(){
 	//show debug info
 	if (showSettings) console.log('╔═══════════════════════════════════╗\n║ Browser Video Options: Debug Info ║\n╚═══════════════════════════════════╝\n║ loop'+' = '+loop+'\n║ autoplay'+' = '+autoplay+'\n║ muted'+' = '+muted+'\n║ controls'+' = '+controls+'\n║ noPip'+' = '+noPip+'\n║ noDownload'+' = '+noDownload+'\n║ noRemotePlayback'+' = '+noRemotePlayback+'\n║ noFullscreen'+' = '+noFullscreen+'\n║ width'+' = '+width+'\n║ height'+' = '+height+'\n║ poster'+' = '+poster+'\n║ volume'+' = '+volume+'\n║ audioLoop'+' = '+audioLoop+'\n║ audioAutoplay'+' = '+audioAutoplay+'\n║ audioMuted'+' = '+audioMuted+'\n║ audioControls'+' = '+audioControls+'\n║ audioVolume'+' = '+audioVolume+'\n║ showSettings'+' = '+showSettings+'\n║ customCss'+' = '+customCss)
 	//apply custom css
-	if (customCss) $('<style id="browser-video-options-css">'+customCss+'</style>').appendTo('head');
+	if (customCss) $('<style id="browser-video-options-css">'+customCss+'</style>').appendTo('body');
 });
