@@ -31,7 +31,7 @@
 ║ height           ║ Video height; optional            ║ CSS units  ║
 ║ poster           ║ Placeholder image; optional       ║ URL        ║
 ║ volume           ║ Default volume level              ║ 0.0 - 1.0  ║
-║ speed            ║ Default volume level              ║ 0.0 - 1.0  ║
+║ speed            ║ Default playback speed            ║ 0.0 - 1.0  ║
 ╠══════════════════╬═══════════════════════════════════╬════════════╣
 ║ audioLoop        ║ Replay after ending               ║ true/false ║
 ║ audioAutoplay    ║ Automatically start playing       ║ true/false ║
