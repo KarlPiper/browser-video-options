@@ -11,7 +11,7 @@
 // @require        https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/keyby.js
 // @require        https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/screenfull.js
 // @icon           https://raw.githubusercontent.com/KarlPiper/browser-video-options/master/icon.png
-// @version        7.0
+// @version        7.1
 // ==/UserScript==
 
 //don't forget to allow your script manager to run in incognito and local files
